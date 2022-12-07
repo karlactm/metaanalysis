@@ -6,11 +6,11 @@ This repository maintains the implementation of our meta-analysis that integrate
 
 This project is also publicly available in CodeOcean here. Hence, you can execute our code and obtain the results. Our main script invokes five scripts developed for the steps  for processing the data were cleaning, integrating and transforming data. The scripts developed for each of the steps can be seen below: 
 
-1. **Cleaning data:** 
+1. **Data Cleaning:** 
 - processing_protein_groups.R: removes proteins considered as contaminants, as well as proteins with the missing gene name and with the duplicate gene name. Besides processes the peptides number and the genes number.
-3. **Integrationg data:**
+3. **Data Integration:**
 - integrating_protein_groups.R: changes the format of the protein group tables, adds descriptive columns about the biological samples and integrates the protein group tables.
-4. **Transformation data:**
+4. **Data Transformation:**
 - normalizing_integrated_data.R: transforms (using log2) and then normalizes (using Z-score) the intensity measurements.
 * imputing_integrated_data.R: replaces missing values with imputed values.
 + converting_integrated_data.R: calculates, for each protein, the median of the intensity values for all samples of the same tissue and converts the median into three types of categories (low, medium and high).
