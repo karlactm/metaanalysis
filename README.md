@@ -8,11 +8,11 @@ This project is also publicly available in CodeOcean here. Hence, you can execut
 
 1. **Cleaning data:** 
 - processing_protein_groups.R: removes proteins considered as contaminants, as well as proteins with the missing gene name and with the duplicate gene name. Besides processes the peptides number and the genes number.
-3. **Integrating data:**
+3. **Integrationg data:**
 - integrating_protein_groups.R: changes the format of the protein group tables, adds descriptive columns about the biological samples and integrates the protein group tables.
-4. **Transformating data:**
-- normalizating_integrated_data.R: transforms (using log2) and then normalizes (using Z-score) the intensity measurements.
-* imputating_integrated_data.R: replaces missing values with imputed values.
-+ categorizing_integrated_data.R: calculates, for each protein, the median of the intensity values for all samples of the same tissue and converts the median into three types of categories (low, medium and high).
+4. **Transformation data:**
+- normalizing_integrated_data.R: transforms (using log2) and then normalizes (using Z-score) the intensity measurements.
+* imputing_integrated_data.R: replaces missing values with imputed values.
++ converting_integrated_data.R: calculates, for each protein, the median of the intensity values for all samples of the same tissue and converts the median into three types of categories (low, medium and high).
 
 In house packages [tidyverse](https://cran.r-project.org/web/packages/tidyverse/index.html), [truncnorm](https://cran.r-project.org/web/packages/truncnorm/), [arules](https://cran.r-project.org/web/packages/arules/) and [this.path](https://cran.r-project.org/web/packages/this.path/index.html) installation are required.
