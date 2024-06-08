@@ -7,7 +7,7 @@ print("> Loaded importation data: ct_antigens.tsv")
 # selecting interest columns
 imputed_data <- imputed_data %>% select(c(Dataset, Sample, Tissue, `Gene names`, Z_score_group))
 
-# Calculating median
+# calculating median
 intensity_z_score_data <-  imputed_data %>% group_by(`Gene names`, Tissue) %>%
   summarise("Median Z-score" = median(Z_score_group, na.rm= TRUE), .groups = "keep")
 
