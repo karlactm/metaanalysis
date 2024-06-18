@@ -1,7 +1,7 @@
 # reading the input datasets 
 imputed_data <- read_tsv("../results/imputed_data.tsv")
 print("> Loaded importation data: imputed_data.tsv")
-cts_genes <- read_tsv("../data/ct_antigens.tsv")
+ctas_transcriptomic_level <- read_tsv("../data/ct_antigens.tsv")
 print("> Loaded importation data: ct_antigens.tsv")
 
 # selecting interest columns
@@ -26,10 +26,10 @@ intensity_z_score_data_disc <- intensity_z_score_data_disc %>%
   left_join(intensity_z_score_data, by = c("Gene names", "Tissue")) %>%
   relocate(`Gene names`, Tissue, `Median Z-score`, Class)
 
-# ct antigens
-cts_data <- intensity_z_score_data_disc %>% 
-  inner_join(cts_genes, by = "Gene names") 
+# ctas observed at the protein level
+ctas_proteomic_level <- intensity_z_score_data_disc %>% 
+  inner_join(ctas_transcriptomic_level, by = "Gene names") 
 
 # writing the results as a tsv file  
-write_tsv(cts_data, "../results/cts_equal_freq.tsv")
-print("> Exportation data: cts_equal_freq.tsv")
+write_tsv(ctas_proteomic_level, "../results/ctas_proteomic_level.tsv")
+print("> Exportation data: ctas_proteomic_level.tsv")
