@@ -8,14 +8,9 @@ healthy_tissue <- pull(healthy_tissue)
 normalized_data <- normalized_data %>%
   mutate(Tissue = ifelse(`Id Tissue` %in% healthy_tissue, "Healthy Tissue", Tissue))
 
-# calculating min, mean and sd
-min_dt <- min(normalized_data$Z_score_group, na.rm = T)
-mean_dt <- mean(normalized_data$Z_score_group, na.rm = T)
-sd_dt <- sd(normalized_data$Z_score_group, na.rm = T)
-
 # producing the table with the statitics results
 statistics <- normalized_data %>% 
-  group_by(`Gene names`) %>%
+  group_by(`Dataset`) %>%
   dplyr::summarise(
     n = n(),
     min =  min(Z_score_group, na.rm = T),
@@ -28,20 +23,14 @@ statistics <- normalized_data %>%
 
 # imputating values
 imputed_data <- normalized_data %>% 
-  group_by(`Gene names`) %>%
-  inner_join(statistics, by = "Gene names") %>%
+  group_by(`Dataset`) %>%
+  inner_join(statistics, by = "Dataset") %>%
   mutate(Z_score_group =  ifelse(is.na(Z_score_group),
-                                 ifelse((notnas) > (ceiling((5*n)/100)),
-                                        rtruncnorm(sum(is.na(Z_score_group)), 
-                                                   a=-Inf, 
-                                                   b=min, 
-                                                   mean=median, 
-                                                   sd=sd),
-                                        rtruncnorm(sum(is.na(Z_score_group)), 
-                                                   a=-Inf, 
-                                                   b=min_dt, 
-                                                   mean=(mean_dt - (1.8*sd_dt)), 
-                                                   sd=(sd_dt * 0.3))),
+                                 rtruncnorm(sum(is.na(Z_score_group)), 
+                                            a=-Inf, 
+                                            b=min, 
+                                            mean=(mean - (1.8*sd)), 
+                                            sd=(sd * 0.3)),
                                  Z_score_group)) %>%
   select(-c(n, mean, min, sd, nas, notnas))
 
